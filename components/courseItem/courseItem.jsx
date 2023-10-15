@@ -1,10 +1,15 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Pressable } from "react-native";
 
-const CourseItem = ({ course }) => (
-  <View style={styles.courseContainer}>
-    <Text style={styles.course}>{course.text}</Text>
-  </View>
-);
+const CourseItem = ({ course, handleDeleteItem }) => {
+  console.log({ course });
+  return (
+    <Pressable onPress={() => handleDeleteItem(course.id)}>
+      <View style={styles.courseContainer}>
+        <Text style={styles.course}>{course.text}</Text>
+      </View>
+    </Pressable>
+  );
+};
 
 const styles = StyleSheet.create({
   course: {

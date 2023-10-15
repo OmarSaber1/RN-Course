@@ -7,11 +7,15 @@ export default function App() {
   const [courses, setCourses] = useState([]);
 
   function handleButtonPress(currentText) {
-    console.log(currentText);
     setCourses((prevState) => [
       ...prevState,
       { text: currentText, id: Math.random().toString() },
     ]);
+  }
+
+  function handleDeleteItem(id) {
+    const filteredCourses = courses.filter((course) => course.id !== id);
+    setCourses(filteredCourses);
   }
 
   return (
@@ -24,7 +28,9 @@ export default function App() {
         <FlatList
           data={courses}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <CourseItem course={item} />}
+          renderItem={({ item }) => (
+            <CourseItem course={item} handleDeleteItem={handleDeleteItem} />
+          )}
         />
       </View>
     </View>
