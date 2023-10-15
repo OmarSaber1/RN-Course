@@ -1,20 +1,24 @@
 import { Text, View, StyleSheet, Pressable } from "react-native";
 
 const CourseItem = ({ course, handleDeleteItem }) => {
-  console.log({ course });
   return (
-    <Pressable onPress={() => handleDeleteItem(course.id)}>
-      <View style={styles.courseContainer}>
+    <View style={styles.courseContainer}>
+      <Pressable
+        android_ripple={{ color: "red" }}
+        onPress={() => handleDeleteItem(course.id)}
+      >
         <Text style={styles.course}>{course.text}</Text>
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  course: {
+  courseContainer: {
     backgroundColor: "purple",
     padding: 10,
+  },
+  course: {
     borderRadius: 10,
     margin: 5,
     color: "white",
