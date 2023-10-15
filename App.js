@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   Button,
-  ScrollView,
+  FlatList,
   StyleSheet,
   Text,
   TextInput,
@@ -17,7 +17,10 @@ export default function App() {
   }
 
   function handleButtonPress() {
-    setCourses((prevState) => [...prevState, textInput]);
+    setCourses((prevState) => [
+      ...prevState,
+      { text: textInput, id: Math.random().toString() },
+    ]);
   }
 
   return (
@@ -33,13 +36,13 @@ export default function App() {
       </View>
       <View style={styles.listWrapper}>
         <Text style={styles.courseHeader}>List Of Todo</Text>
-        <ScrollView bounces={false} alwaysBounceVertical={false}>
-          {courses.map((course, index) => (
-            <Text style={styles.course} key={index}>
-              {course}
-            </Text>
-          ))}
-        </ScrollView>
+        <FlatList
+          data={courses}
+          keyExtractor={(item) => item.id}
+          renderItem={(itemData) => (
+            <Text style={styles.course}>{itemData.item.text}</Text>
+          )}
+        />
       </View>
     </View>
   );
