@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { Button, FlatList, StyleSheet, Text, View } from "react-native";
 import CourseItem from "./components/courseItem/courseItem";
 import CourseInput from "./components/courseInput/courseInput";
+import { CoursesModal } from "./components/modal/modal";
 
 export default function App() {
   const [courses, setCourses] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState([]);
 
   function handleButtonPress(currentText) {
     setCourses((prevState) => [
@@ -18,8 +20,20 @@ export default function App() {
     setCourses(filteredCourses);
   }
 
+  function handleModalState() {
+    setIsModalVisible((prevState) => !prevState);
+  }
+
   return (
     <View style={styles.container}>
+      <CoursesModal
+        isModalVisible={isModalVisible}
+        handleModalOpen={handleModalState}
+      />
+      <Button
+        title='Open Modal'
+        onPress={() => setIsModalVisible((prevState) => !prevState)}
+      />
       <View style={styles.inputWrapper}>
         <CourseInput onAddItem={handleButtonPress} />
       </View>
@@ -39,6 +53,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 50,
     paddingHorizontal: 20,
     flex: 1,
     display: "flex",
