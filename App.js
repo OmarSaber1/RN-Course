@@ -1,14 +1,45 @@
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { useState } from "react";
+import {
+  Button,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 export default function App() {
+  const [textInput, setTextInput] = useState("");
+  const [courses, setCourses] = useState([]);
+
+  function handleTextChange(text) {
+    setTextInput(text);
+  }
+
+  function handleButtonPress() {
+    setCourses((prevState) => [...prevState, textInput]);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.inputWrapper}>
-        <TextInput style={styles.inputStyle} placeholder='Enter Todo' />
-        <Button title='Add Todo' />
+        <TextInput
+          onChangeText={handleTextChange}
+          value={textInput}
+          style={styles.inputStyle}
+          placeholder='Enter Todo'
+        />
+        <Button onPress={handleButtonPress} title='Add Todo' />
       </View>
       <View style={styles.listWrapper}>
-        <Text>List of Todos</Text>
+        <Text style={styles.courseHeader}>List Of Todo</Text>
+        <ScrollView bounces={false} alwaysBounceVertical={false}>
+          {courses.map((course, index) => (
+            <Text style={styles.course} key={index}>
+              {course}
+            </Text>
+          ))}
+        </ScrollView>
       </View>
     </View>
   );
@@ -16,7 +47,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 50,
+    paddingHorizontal: 20,
     flex: 1,
     display: "flex",
     flexDirection: "column",
@@ -39,6 +70,17 @@ const styles = StyleSheet.create({
   },
   listWrapper: {
     flex: 3,
-    marginTop: 20,
+    marginTop: 5,
+  },
+  courseHeader: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  course: {
+    backgroundColor: "purple",
+    padding: 10,
+    borderRadius: 10,
+    margin: 5,
+    color: "white",
   },
 });
