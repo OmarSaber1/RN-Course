@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Button, FlatList, StyleSheet, Text, View } from "react-native";
+import { Button, FlatList, Image, StyleSheet, Text, View } from "react-native";
 import CourseItem from "./components/courseItem/courseItem";
 import CourseInput from "./components/courseInput/courseInput";
 import { CoursesModal } from "./components/modal/modal";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [courses, setCourses] = useState([]);
@@ -25,29 +26,39 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <CoursesModal
-        isModalVisible={isModalVisible}
-        handleModalOpen={handleModalState}
-      />
-      <Button
-        title='Open Modal'
-        onPress={() => setIsModalVisible((prevState) => !prevState)}
-      />
-      <View style={styles.inputWrapper}>
-        <CourseInput onAddItem={handleButtonPress} />
-      </View>
-      <View style={styles.listWrapper}>
-        <Text style={styles.courseHeader}>List Of Todo</Text>
-        <FlatList
-          data={courses}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <CourseItem course={item} handleDeleteItem={handleDeleteItem} />
-          )}
+    <>
+      <StatusBar style='light' />
+      <View style={styles.container}>
+        <CoursesModal
+          isModalVisible={isModalVisible}
+          handleModalOpen={handleModalState}
         />
+        <Button
+          title='Open Modal'
+          onPress={() => setIsModalVisible((prevState) => !prevState)}
+        />
+        <View style={styles.inputWrapper}>
+          <CourseInput onAddItem={handleButtonPress} />
+        </View>
+        <View style={styles.listWrapper}>
+          <Image
+            width={100}
+            height={100}
+            source={{
+              uri: "https://st.depositphotos.com/2419757/55802/v/450/depositphotos_558022218-stock-illustration-arrow-dart-hitting-target-aim.jpg",
+            }}
+          />
+          <Text style={styles.courseHeader}>List Of Todo</Text>
+          <FlatList
+            data={courses}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <CourseItem course={item} handleDeleteItem={handleDeleteItem} />
+            )}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -58,6 +69,7 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     flexDirection: "column",
+    backgroundColor: "grey",
   },
   inputWrapper: {
     flex: 1,
@@ -72,6 +84,7 @@ const styles = StyleSheet.create({
   listWrapper: {
     flex: 3,
     marginTop: 5,
+    alignItems: "center",
   },
   courseHeader: {
     fontSize: 20,
