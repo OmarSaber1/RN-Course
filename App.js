@@ -1,93 +1,62 @@
 import { useState } from "react";
-import { Button, FlatList, Image, StyleSheet, Text, View } from "react-native";
-import CourseItem from "./components/courseItem/courseItem";
-import CourseInput from "./components/courseInput/courseInput";
-import { CoursesModal } from "./components/modal/modal";
-import { StatusBar } from "expo-status-bar";
+import { View, TextInput, StyleSheet } from "react-native";
+import PrimaryButton from "./components/PrimaryButton/PrimaryButton";
 
-export default function App() {
-  const [courses, setCourses] = useState([]);
-  const [isModalVisible, setIsModalVisible] = useState([]);
+const App = () => {
+  const [inputText, setInputText] = useState("");
 
-  function handleButtonPress(currentText) {
-    setCourses((prevState) => [
-      ...prevState,
-      { text: currentText, id: Math.random().toString() },
-    ]);
-  }
+  const handleConfirm = () => {
+    // Implement your logic for the "Confirm" button here
+    console.log("Confirm button pressed");
+  };
 
-  function handleDeleteItem(id) {
-    const filteredCourses = courses.filter((course) => course.id !== id);
-    setCourses(filteredCourses);
-  }
-
-  function handleModalState() {
-    setIsModalVisible((prevState) => !prevState);
-  }
+  const handleReset = () => {
+    // Implement your logic for the "Reset" button here
+    setInputText("");
+  };
 
   return (
-    <>
-      <StatusBar style='light' />
-      <View style={styles.container}>
-        <CoursesModal
-          isModalVisible={isModalVisible}
-          handleModalOpen={handleModalState}
-        />
-        <Button
-          title='Open Modal'
-          onPress={() => setIsModalVisible((prevState) => !prevState)}
-        />
-        <View style={styles.inputWrapper}>
-          <CourseInput onAddItem={handleButtonPress} />
-        </View>
-        <View style={styles.listWrapper}>
-          <Image
-            width={100}
-            height={100}
-            source={{
-              uri: "https://st.depositphotos.com/2419757/55802/v/450/depositphotos_558022218-stock-illustration-arrow-dart-hitting-target-aim.jpg",
-            }}
-          />
-          <Text style={styles.courseHeader}>List Of Todo</Text>
-          <FlatList
-            data={courses}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <CourseItem course={item} handleDeleteItem={handleDeleteItem} />
-            )}
-          />
-        </View>
-      </View>
-    </>
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        value={inputText}
+        onChangeText={(text) => setInputText(text)}
+        maxLength={2}
+      />
+      <PrimaryButton title='Confirm' onPress={handleConfirm} />
+      <PrimaryButton title='Reset' onPress={handleReset} />
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
-    paddingHorizontal: 20,
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "grey",
-  },
-  inputWrapper: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    marginBottom: 20,
-    borderBottomColor: "skyblue",
+    padding: 20,
+    marginTop: 50,
+    marginHorizontal: 20,
+    backgroundColor: "purple",
+    // Add shadows based on platform
+    shadowColor: "rgba(0, 0, 0, 0.2)",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    borderRadius: 20,
+    elevation: 8, // Android shadow
+  },
+  input: {
     borderBottomWidth: 2,
-  },
-
-  listWrapper: {
-    flex: 3,
-    marginTop: 5,
-    alignItems: "center",
-  },
-  courseHeader: {
-    fontSize: 20,
+    borderBottomColor: "#ddb52f",
+    height: 50,
+    width: 50,
+    padding: 10,
+    marginVertical: 10,
+    fontSize: 28,
+    textAlign: "center",
     fontWeight: "bold",
+    color: "#ddb52f",
   },
 });
+
+export default App;
