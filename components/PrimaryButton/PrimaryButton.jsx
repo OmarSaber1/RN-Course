@@ -1,23 +1,34 @@
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Pressable, View } from "react-native";
 
 const PrimaryButton = ({ title, onPress }) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.buttonText}>{title}</Text>
-    </TouchableOpacity>
+    <View style={styles.buttonContainer}>
+      <Pressable
+        android_ripple={{ color: "#511c51" }}
+        style={styles.button}
+        onPress={onPress}
+      >
+        <Text style={styles.buttonText}>{title}</Text>
+      </Pressable>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  buttonContainer: {
+    width: "100%",
+    overflow: "hidden", // Clip the ripple effect
+  },
   button: {
-    backgroundColor: "#007AFF",
-    padding: 10,
-    borderRadius: 5,
+    paddingVertical: 10,
+    backgroundColor: "#642364",
     marginTop: 10,
+    borderRadius: 20, // Add the border radius to the button style
   },
   buttonText: {
-    color: "white",
+    color: "#e9d1d1",
     fontSize: 16,
+    fontWeight: "bold",
     textAlign: "center",
   },
 });

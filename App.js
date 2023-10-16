@@ -22,9 +22,16 @@ const App = () => {
         value={inputText}
         onChangeText={(text) => setInputText(text)}
         maxLength={2}
+        keyboardType='number-pad'
       />
-      <PrimaryButton title='Confirm' onPress={handleConfirm} />
-      <PrimaryButton title='Reset' onPress={handleReset} />
+      <View style={styles.buttonsContainer}>
+        <View style={styles.buttonContainer}>
+          <PrimaryButton title='Confirm' onPress={handleConfirm} />
+        </View>
+        <View style={styles.buttonContainer}>
+          <PrimaryButton title='Reset' onPress={handleReset} />
+        </View>
+      </View>
     </View>
   );
 };
@@ -36,7 +43,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 50,
     marginHorizontal: 20,
-    backgroundColor: "purple",
+    backgroundColor: "#9c459c",
     // Add shadows based on platform
     shadowColor: "rgba(0, 0, 0, 0.2)",
     shadowOffset: { width: 0, height: 2 },
@@ -56,6 +63,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     color: "#ddb52f",
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    gap: 5,
+  },
+  buttonContainer: {
+    flex: 1,
   },
 });
 
