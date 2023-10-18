@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { View, TextInput, StyleSheet, ImageBackground } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  ImageBackground,
+  Alert,
+} from "react-native";
 import PrimaryButton from "./components/PrimaryButton/PrimaryButton";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -7,12 +13,17 @@ const App = () => {
   const [inputText, setInputText] = useState("");
 
   const handleConfirm = () => {
-    // Implement your logic for the "Confirm" button here
-    console.log("Confirm button pressed");
-  };
+    const inputNumber = parseInt(inputText);
 
+    if (isNaN(inputNumber) || inputNumber <= 0 || inputNumber > 99) {
+      Alert.alert("Invalid Number!", "Please enter a number between 0 and 99", [
+        { text: "Okay", style: "destructive", onPress: handleReset },
+      ]);
+      return;
+    }
+    console.log("Confirm button pressed", inputNumber);
+  };
   const handleReset = () => {
-    // Implement your logic for the "Reset" button here
     setInputText("");
   };
 
