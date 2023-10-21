@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, ImageBackground } from "react-native";
+import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
@@ -24,7 +24,9 @@ const App = () => {
         source={require("./assets/dice.jpg")}
         imageStyle={{ opacity: 0.14 }}
       >
-        {currentScreen}
+        <SafeAreaView style={styles.innerContainer}>
+          {currentScreen}
+        </SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );
@@ -34,6 +36,10 @@ const styles = StyleSheet.create({
   parentContainer: {
     flex: 1,
     backgroundColor: "#ddb52f",
+  },
+  innerContainer: {
+    padding: 20,
+    marginTop: 30,
   },
 });
 
