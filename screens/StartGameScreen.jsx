@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { Alert, StyleSheet, TextInput, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton/PrimaryButton";
 
-function StartGameScreen({ setCurrentNumber }) {
+function StartGameScreen({ setGoalNumber }) {
   const [inputText, setInputText] = useState("");
 
   const handleConfirm = () => {
@@ -14,7 +14,7 @@ function StartGameScreen({ setCurrentNumber }) {
       ]);
       return;
     }
-    setCurrentNumber(inputNumber);
+    setGoalNumber(inputNumber);
   };
   const handleReset = () => {
     setInputText("");

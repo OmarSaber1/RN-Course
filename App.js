@@ -3,14 +3,26 @@ import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
+import GameOverScreen from "./screens/GameOverScreen";
 
 const App = () => {
-  const [currentNumber, setCurrentNumber] = useState();
+  const [goalNumber, setGoalNumber] = useState();
+  const [isGameOver, setIsGameOver] = useState(false);
 
-  let currentScreen = <StartGameScreen setCurrentNumber={setCurrentNumber} />;
+  let currentScreen = <StartGameScreen setGoalNumber={setGoalNumber} />;
 
-  if (currentNumber) {
-    currentScreen = <GameScreen />;
+  function handleGameOver() {
+    setIsGameOver(true);
+  }
+
+  if (goalNumber) {
+    currentScreen = (
+      <GameScreen goalNumber={goalNumber} handleGameOver={handleGameOver} />
+    );
+  }
+
+  if (goalNumber && isGameOver) {
+    currentScreen = <GameOverScreen />;
   }
 
   return (
