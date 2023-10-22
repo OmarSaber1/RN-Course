@@ -30,10 +30,10 @@ function StartGameScreen({ setGoalNumber }) {
       />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
-          <PrimaryButton title='Confirm' onPress={handleConfirm} />
+          <PrimaryButton onPress={handleConfirm}>Confirm </PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
-          <PrimaryButton title='Reset' onPress={handleReset} />
+          <PrimaryButton onPress={handleReset}> Reset</PrimaryButton>
         </View>
       </View>
     </View>

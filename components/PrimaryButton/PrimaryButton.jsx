@@ -1,6 +1,6 @@
 import { Text, StyleSheet, Pressable, View } from "react-native";
 
-const PrimaryButton = ({ title, onPress }) => {
+const PrimaryButton = ({ children, onPress }) => {
   return (
     <View style={styles.buttonContainer}>
       <Pressable
@@ -8,7 +8,7 @@ const PrimaryButton = ({ title, onPress }) => {
         style={styles.button}
         onPress={onPress}
       >
-        <Text style={styles.buttonText}>{title}</Text>
+        <Text style={styles.buttonText}>{children}</Text>
       </Pressable>
     </View>
   );

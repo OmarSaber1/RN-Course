@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, Button, Alert } from "react-native";
+import { View, Button, Alert, StyleSheet } from "react-native";
 import Title from "../components/Title/Title";
 import NumberContainer from "../components/NumberContainer/NumberContainer";
+import { Ionicons } from "@expo/vector-icons";
+import PrimaryButton from "../components/PrimaryButton/PrimaryButton";
 
 const generateRandomNumber = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -49,10 +51,35 @@ const GameScreen = ({ goalNumber, handleGameOver }) => {
     <View>
       <Title>Opponent's Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <Button title='LOWER -' onPress={() => nextGuessHandler("lower")} />
-      <Button title='GREATER +' onPress={() => nextGuessHandler("greater")} />
+      <View style={styles.buttonContainer}>
+        <PrimaryButton onPress={() => nextGuessHandler("lower")}>
+          <Ionicons color='white' name='md-remove' size={20} />
+        </PrimaryButton>
+        <PrimaryButton onPress={() => nextGuessHandler("greater")}>
+          <Ionicons color='white' name='md-add' size={20} />
+        </PrimaryButton>
+      </View>
     </View>
   );
 };
 
 export default GameScreen;
+
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    padding: 10,
+    alignItems: "center",
+  },
+  buttonContainer: {
+    justifyContent: "space-around",
+    marginTop: 20,
+    gap: 5,
+  },
+  buttonStyle: {
+    borderWidth: 2,
+    borderRadius: 10,
+    backgroundColor: "#5d2525",
+    color: "red",
+  },
+});
