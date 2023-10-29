@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, StyleSheet, TextInput, View } from "react-native";
+import { Alert, StyleSheet, TextInput, View, Dimensions } from "react-native";
 import PrimaryButton from "../components/PrimaryButton/PrimaryButton";
 
 function StartGameScreen({ setGoalNumber }) {
@@ -19,6 +19,9 @@ function StartGameScreen({ setGoalNumber }) {
   const handleReset = () => {
     setInputText("");
   };
+
+  const deviceDimensions = Dimensions.get("window").width;
+
   return (
     <View style={styles.inputBoxcontainer}>
       <TextInput
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
   inputBoxcontainer: {
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
+    padding: deviceDimensions < 400 ? 20 : 30,
     marginTop: 50,
     marginHorizontal: 20,
     backgroundColor: "#9c459c",
