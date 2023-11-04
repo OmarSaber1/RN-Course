@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Alert, StyleSheet, TextInput, View, Dimensions } from "react-native";
 import PrimaryButton from "../components/PrimaryButton/PrimaryButton";
 
+const deviceDimensions = Dimensions.get("window").width;
+
 function StartGameScreen({ setGoalNumber }) {
   const [inputText, setInputText] = useState("");
 
@@ -19,8 +21,6 @@ function StartGameScreen({ setGoalNumber }) {
   const handleReset = () => {
     setInputText("");
   };
-
-  const deviceDimensions = Dimensions.get("window").width;
 
   return (
     <View style={styles.inputBoxcontainer}>
