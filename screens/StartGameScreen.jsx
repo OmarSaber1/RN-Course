@@ -8,6 +8,7 @@ import {
   useWindowDimensions,
   KeyboardAvoidingView,
   ScrollView,
+  Platform,
 } from "react-native";
 import PrimaryButton from "../components/PrimaryButton/PrimaryButton";
 
@@ -81,7 +82,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 4,
-    borderRadius: 20,
+    // borderRadius: Platform.OS === "ios" ? 0 : 20,
+    borderRadius: Platform.select({ ios: 0, android: 20 }),
     elevation: 8, // Android shadow
   },
   input: {

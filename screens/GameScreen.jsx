@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Button, Alert, StyleSheet } from "react-native";
+import { View, Alert, StyleSheet } from "react-native";
 import Title from "../components/Title/Title";
 import NumberContainer from "../components/NumberContainer/NumberContainer";
 import { Ionicons } from "@expo/vector-icons";
