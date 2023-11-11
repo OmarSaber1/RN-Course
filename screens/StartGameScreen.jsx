@@ -1,11 +1,21 @@
 import React, { useState } from "react";
-import { Alert, StyleSheet, TextInput, View, Dimensions } from "react-native";
+import {
+  Alert,
+  StyleSheet,
+  TextInput,
+  View,
+  Dimensions,
+  useWindowDimensions,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
 import PrimaryButton from "../components/PrimaryButton/PrimaryButton";
 
 const deviceDimensions = Dimensions.get("window").width;
 
 function StartGameScreen({ setGoalNumber }) {
   const [inputText, setInputText] = useState("");
+  const { height } = useWindowDimensions();
 
   const handleConfirm = () => {
     const inputNumber = parseInt(inputText);
@@ -22,35 +32,48 @@ function StartGameScreen({ setGoalNumber }) {
     setInputText("");
   };
 
+  const deviceHeightMargin = height < 400 ? 50 : 100;
+
+  console.log({ deviceHeightMargin });
+
   return (
-    <View style={styles.inputBoxcontainer}>
-      <TextInput
-        style={styles.input}
-        value={inputText}
-        onChangeText={(text) => setInputText(text)}
-        maxLength={2}
-        keyboardType='number-pad'
-      />
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={handleConfirm}>Confirm </PrimaryButton>
+    <ScrollView>
+      <KeyboardAvoidingView behavior='position'>
+        <View
+          style={[styles.inputBoxcontainer, { marginTop: deviceHeightMargin }]}
+        >
+          <TextInput
+            style={styles.input}
+            value={inputText}
+            onChangeText={(text) => setInputText(text)}
+            maxLength={2}
+            keyboardType='number-pad'
+          />
+          <View style={styles.buttonsContainer}>
+            <View style={styles.buttonContainer}>
+              <PrimaryButton onPress={handleConfirm}>Confirm </PrimaryButton>
+            </View>
+            <View style={styles.buttonContainer}>
+              <PrimaryButton onPress={handleReset}> Reset</PrimaryButton>
+            </View>
+          </View>
         </View>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={handleReset}> Reset</PrimaryButton>
-        </View>
-      </View>
-    </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   inputBoxcontainer: {
     justifyContent: "center",
     alignItems: "center",
     padding: deviceDimensions < 400 ? 20 : 30,
-    marginTop: 50,
+    marginTop: deviceDimensions < 400 ? 20 : 50,
     marginHorizontal: 20,
     backgroundColor: "#9c459c",
     // Add shadows based on platform
